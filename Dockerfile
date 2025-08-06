@@ -24,7 +24,8 @@ WORKDIR /var/www/html
 
 # Copia los archivos del proyecto al contenedor
 COPY . .
-
+# Copia el archivo de configuración de Apache
+COPY docker-config/000-default.conf /etc/apache2/sites-available/000-default.conf
 # Instala las dependencias de Composer y Node
 RUN composer install --no-interaction --optimize-autoloader
 RUN npm install
