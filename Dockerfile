@@ -1,7 +1,7 @@
 # Usa una imagen base de PHP con Apache
 FROM php:8.1-apache
 
-# Instala extensiones de PHP y otras dependencias necesarias
+# Instala Node.js y otras dependencias necesarias
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
+    # Instala Node.js y npm usando NodeSource
+    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo_mysql mbstring zip gd \
     && a2enmod rewrite
