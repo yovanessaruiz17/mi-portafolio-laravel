@@ -30,6 +30,12 @@ RUN composer install --no-interaction --optimize-autoloader
 RUN npm install
 RUN npm run build
 
+# Genera los archivos de caché y la clave de la aplicación
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+RUN php artisan key:generate
+
 # Configura permisos
 RUN chown -R www-data:www-data /var/www/html/storage \
     /var/www/html/bootstrap/cache
